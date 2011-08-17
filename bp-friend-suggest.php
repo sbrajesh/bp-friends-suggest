@@ -141,7 +141,7 @@ function  bp_show_friend_suggestions_list($limit=5){
                               </ul>
                      <?php else:?>
                       <div id="message" class="info">
-                        <p><?php _e( "We don't have enough details to sugggest a friend yet", 'buddypress' ) ?></p>
+                        <p><?php _e( "We don't have enough details to suggest a friend yet", 'buddypress' ) ?></p>
                     </div>
 
                             <?php endif;?>
