@@ -67,13 +67,13 @@ class BP_Friend_Suggestions_Widget extends WP_Widget {
 			$max =absint( $instance['max'] );
 			?>
 			<p>
-				<label for="bpgallery-widget-sitewide-galleries-count"><?php _e( 'Title' , 'bp-show-friends'); ?>
-					<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo attribute_escape( $title ); ?>" />
+				<label for='bp-show-friend-widget-suggest-title'><?php _e( 'Title' , 'bp-show-friends'); ?>
+					<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $title ); ?>" />
 				</label>
 			</p>
 			<p>
-                            <label for="bp-show-friends-widget-per-page"><?php _e( 'Max Number of suggestions:', 'bp-show-friends' ); ?>
-                                    <input class="widefat" id="<?php echo $this->get_field_id( 'max' ); ?>" name="<?php echo $this->get_field_name( 'max' ); ?>" type="text" value="<?php echo attribute_escape( $max ); ?>" style="width: 30%" />
+                            <label for='bp-show-friends-widget-per-page'><?php _e( 'Max Number of suggestions:', 'bp-show-friends' ); ?>
+                                    <input class="widefat" id="<?php echo $this->get_field_id( 'max' ); ?>" name="<?php echo $this->get_field_name( 'max' ); ?>" type="text" value="<?php echo esc_attr( $max ); ?>" style="width: 30%" />
                             </label>
                         </p>
 			
@@ -152,7 +152,7 @@ function friend_suggest_register_widget(){
   add_action('widgets_init', create_function('', 'return register_widget("BP_Friend_Suggestions_Widget");') );
   
 }
-add_action("bp_init","friend_suggest_register_widget");
+add_action("bp_loaded","friend_suggest_register_widget");
 
 function bp_friend_suggest_hide_link($possible_friend){
     $url=bp_get_root_domain()."/remove-friend-suggestion/?suggest_id=".$possible_friend."&_wpnonce=".wp_create_nonce('friend-suggestion-remove-'.$possible_friend);
