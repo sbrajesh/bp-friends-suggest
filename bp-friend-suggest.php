@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: BP Friends Suggestions Widget
-Plugin URI: http://buddydev/com/bp-friends-suggestions/
+Plugin URI: http://buddydev.com/plugins/buddypress-friends-suggest/
 Description: BuddyPress Friends Suggestion Widget  - displays friend suggestions for logged in users.
-Version: 1.0
+Version: 1.0.1
 Author: gwu
 Author URI: http://buddydev.com/members/gwu123
- Last Updated: Feb 8, 2011
+ Last Updated: August 17, 2011
 */
 
 
