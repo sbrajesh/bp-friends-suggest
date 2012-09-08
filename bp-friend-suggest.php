@@ -3,10 +3,10 @@
 Plugin Name: BP Friends Suggestions Widget
 Plugin URI: http://buddydev.com/plugins/buddypress-friends-suggest/
 Description: BuddyPress Friends Suggestion Widget  - displays friend suggestions for logged in users.
-Version: 1.0.1
+Version: 1.0.2
 Author: gwu
-Author URI: http://buddydev.com/members/gwu123
- Last Updated: August 17, 2011
+Author URI: http://buddydev.com/members/gwu123/
+ Last Updated: September 8, 2012
 */
 
 
@@ -38,7 +38,7 @@ add_action ( 'bp_init', 'friend_suggest_load_textdomain', 2 );
 
 class BP_Friend_Suggestions_Widget extends WP_Widget {
 	function bp_friend_suggestions_widget() {
-		parent::WP_Widget( false, $name = __( 'Friends Suggest Widget', 'bp-show-friends' ) );
+		parent::__construct( false, $name = __( 'Friends Suggest Widget', 'bp-show-friends' ) );
 	}
 
 	function widget($args, $instance) {
@@ -176,7 +176,7 @@ $excluded=get_user_meta($user_id,"hidden_friend_suggestions" ,true);
 $excluded=(array)($excluded);
 $excluded[]=$suggestion_id;
 update_user_meta($user_id,"hidden_friend_suggestions",$excluded);
-
+    exit(0);
 }
 
 function friend_suggest_get_friendship_requested_user_ids( $user_id ) {
