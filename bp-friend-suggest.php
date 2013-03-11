@@ -9,8 +9,6 @@ Author URI: http://buddydev.com/members/gwu123/
  Last Updated: September 8, 2012
 */
 
-
-
 add_action("wp_print_scripts","bp_friend_suggest_add_js");
 function bp_friend_suggest_add_js(){
     if(!is_user_logged_in())
@@ -31,15 +29,14 @@ function friend_suggest_load_textdomain() {
                     // make sure file exists, and load it
 			load_textdomain( "bp-show-friends", $mofile );
                       
-		
 	}
 }
 add_action ( 'bp_init', 'friend_suggest_load_textdomain', 2 );
 
 class BP_Friend_Suggestions_Widget extends WP_Widget {
-	function bp_friend_suggestions_widget() {
-		parent::__construct( false, $name = __( 'Friends Suggest Widget', 'bp-show-friends' ) );
-	}
+	function __construct() {
+            parent::__construct(false, $name = __( 'Friends Suggest Widget', 'bp-show-friends' ));
+            }
 
 	function widget($args, $instance) {
 		global $bp;
@@ -67,9 +64,9 @@ class BP_Friend_Suggestions_Widget extends WP_Widget {
 			$max =absint( $instance['max'] );
 			?>
 			<p>
-				<label for='bp-show-friend-widget-suggest-title'><?php _e( 'Title' , 'bp-show-friends'); ?>
-					<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $title ); ?>" />
-				</label>
+                            <label for='bp-show-friend-widget-suggest-title'><?php _e( 'Title' , 'bp-show-friends'); ?>
+                                    <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $title ); ?>" />
+                            </label>
 			</p>
 			<p>
                             <label for='bp-show-friends-widget-per-page'><?php _e( 'Max Number of suggestions:', 'bp-show-friends' ); ?>
@@ -81,25 +78,29 @@ class BP_Friend_Suggestions_Widget extends WP_Widget {
 	}	
 }
 
-
 //action takes place here
 function  bp_show_friend_suggestions_list($limit=5){
 	global $bp;
-	$user_id = $bp->loggedin_user->id;
-        $my_friends=(array)friends_get_friend_user_ids($user_id);//get all friend ids
-        $my_friend_req=(array)friend_suggest_get_friendship_requested_user_ids($user_id);//get all friend request by me
+	$user_id = get_current_user_id();
        
+        $my_friends=(array)friends_get_friend_user_ids($user_id);//get all friend ids
+       
+        $my_friend_req=(array)friend_suggest_get_friendship_requested_user_ids($user_id);//get all friend request by me
+     
         $possible_friends=array();//we will store the possible friend ids here
         foreach($my_friends as $friend_id)
                 $possible_friends=array_merge($possible_friends,(array)friends_get_friend_user_ids($friend_id));
+     
 
         //we have the list of friends of friends, we will just remove
         //now get only udifferent friend ids(unique)
         $possible_friends=array_unique($possible_friends);
 
         //intersect my friends with this array
-        $my_friends[]=$bp->loggedin_user->id;//include me to
+        $my_friends[]=get_current_user_id();//include me to
+       
         $excluded_users=get_user_meta($user_id,"hidden_friend_suggestions",true);
+     
         $excluded_users=$excluded_users;
         $excluded_users=array_merge($my_friends,(array)$excluded_users,(array)$my_friend_req);
 
@@ -130,7 +131,7 @@ function  bp_show_friend_suggestions_list($limit=5){
                                              </div>
                                     </div>
                                      <div class="action">
-                                            <?php   bp_friend_suggest_hide_link($possible_friend); ?>
+                                            <?php  bp_friend_suggest_hide_link($possible_friend); ?>
                                             <?php bp_add_friend_button( $possible_friend ); ?>
                                     </div>
                                     <div class="clear"></div>

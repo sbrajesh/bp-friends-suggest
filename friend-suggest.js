@@ -1,6 +1,7 @@
 jQuery(document).ready(function(){
 var j=jQuery;
-j(".suggested-friend-item-list span.remove-friend-suggestion a").live('click',function(){
+j(document).on('click','.suggested-friend-item-list span.remove-friend-suggestion a',function(){
+//j(".suggested-friend-item-list span.remove-friend-suggestion a").live('click',function(){
 //hide the suggestion
 var li=j(this).parent().parent().parent();
 j(li).remove();
