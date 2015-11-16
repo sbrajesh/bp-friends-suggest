@@ -122,7 +122,7 @@ function bp_show_friend_suggestions_list( $limit = 5 ) {
 					$member_name = bp_core_get_user_displayname( $possible_friend );
 				?>
 					<div class="item-avatar">
-						<a href="<?php echo $member_link; ?>"><?php echo bp_core_fetch_avatar( array( 'type' => 'thumb', 'width' => 25, 'height' => 25, 'item_id' => $possible_friend ) ); ?></a>
+						<a href="<?php echo $member_link; ?>"><?php echo bp_core_fetch_avatar( array( 'type' => 'thumb', 'width' => 50, 'height' => 50, 'item_id' => $possible_friend ) ); ?></a>
 					</div>
 
 					<div class="item">
